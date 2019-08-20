@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-//import { HomeContent } from './_pages/homeContent'
 import Card1 from './_component/Card';
+import RegisterContent from './_page/home'
+import AuthContent from './_page/auth'
+import HomeContent from './_page/home'
 
 
 
@@ -62,20 +64,16 @@ function App() {
         <Layout>
           <Switch>
 
-            {/* 注册 */}
+            {/* 主页展示 */}
             <Route path="/home" component={HomeContent}></Route>
 
-            {/* 展示 */}
-            <Route path="/blacklist" component={Blacklist}></Route>
+            {/* 注册 */}
+            <Route path="/register" component={RegisterContent}></Route>
 
             {/* 授权 */}
-            <Route path="/userRegister" component={UserRegister}></Route>
+            <Route path="/auth" component={AuthContent}></Route>
 
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Identity
-            </p>
-            <Card1/>
+
           </Switch >
         </Layout>
       </BrowserRouter >

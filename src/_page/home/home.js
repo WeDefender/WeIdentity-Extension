@@ -14,4 +14,4 @@ Title.propTypes = {
     children: PropTypes.node,
 }
 
-export {Title as RegisterContent}
+export {Title as AuthContent}

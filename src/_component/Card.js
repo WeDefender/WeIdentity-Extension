@@ -50,16 +50,16 @@ function CardT(props) {
     return (
         <div>
                 <Card className={classes.card}>
-                    <CardContent className={classes.content}>
+                    <CardContent>
                         <Typography
-                            className={classes.cardContent}
+                            
                             variant={"h6"}
                             gutterBottom
                         >
                             {"ID:" + 'did:12346567'}
                         </Typography>
                         <Typography
-                            className={classes.cardContent}
+                            
                             variant={"caption"}
                         >
                             {cardDetails[0].cptId} <br />
@@ -75,6 +75,6 @@ function CardT(props) {
     )
 }
 
-const CardWithStyles = withStyles(useStyles)(CardT)
+//const CardWithStyles = withStyles(useStyles)(CardT)
 
-export default CardWithStyles
+export default CardT

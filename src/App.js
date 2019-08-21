@@ -6,6 +6,7 @@ import Card1 from './_component/Card';
 import {HomeContent} from './_page/home'
 import {AuthContent} from './_page/auth'
 import {RegisterContent} from './_page/register'
+import {Layout} from './_page/layout'
 
 
 
@@ -34,7 +35,9 @@ fetch("http://127.0.0.1:7777/postContent", {
   console.log(err);
 });
 */
+
 function App() {
+  /*
   useEffect(() => {
     fetch("http://192.168.1.180:8080/user/createWeId", {
       method: "POST",
@@ -58,24 +61,22 @@ function App() {
       console.log(err);
     });
   });
+  */
   
   return (
 
     <BrowserRouter>
+      <Layout>
           <Switch>
-
             {/* 主页展示 */}
-            <Route path="/" component={HomeContent}></Route>
-
+            <Route path="/home" component={HomeContent}></Route>
             {/* 注册 */}
             <Route path="/register" component={RegisterContent}></Route>
-
             {/* 授权 */}
             <Route path="/auth" component={AuthContent}></Route>
-
-
           </Switch >
-      </BrowserRouter >
+      </Layout>
+    </BrowserRouter >
   );
 }
 

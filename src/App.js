@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
 import Card1 from './_component/Card';
-import RegisterContent from './_page/home'
-import AuthContent from './_page/auth'
-import HomeContent from './_page/home'
+import {HomeContent} from './_page/home'
+import {AuthContent} from './_page/auth'
+import {RegisterContent} from './_page/register'
+
+
 
 
 
@@ -61,11 +62,10 @@ function App() {
   return (
 
     <BrowserRouter>
-        <Layout>
           <Switch>
 
             {/* 主页展示 */}
-            <Route path="/home" component={HomeContent}></Route>
+            <Route path="/" component={HomeContent}></Route>
 
             {/* 注册 */}
             <Route path="/register" component={RegisterContent}></Route>
@@ -75,7 +75,6 @@ function App() {
 
 
           </Switch >
-        </Layout>
       </BrowserRouter >
   );
 }

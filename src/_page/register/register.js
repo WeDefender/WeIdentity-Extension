@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
+import { Link, withRouter } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -37,7 +38,7 @@ function a11yProps(index) {
     };
   }
 
-export function RegisterContent(props) {
+const RegisterWithRouter = withRouter(function RegisterContent(props) {
     const classes = useStyles();
 
     const [values, setValues] = React.useState({
@@ -78,7 +79,8 @@ export function RegisterContent(props) {
                 });
                 chrome.storage.local.set({pubKey: data.data.userWeIdPublicKey.publicKey}, function() {
                     console.log('PubKey is set to ' + data.data.userWeIdPublicKey.publicKey);
-                    alert("创建成功！");
+                    alert("创建成功！");//TODO Dialog组件
+                    props.history.push({pathname: `/home`})
                 });
             }); 
         }).catch(function(err) {
@@ -125,4 +127,6 @@ export function RegisterContent(props) {
             
         </div>
     )
-}
+})
+
+export {RegisterWithRouter as RegisterContent}

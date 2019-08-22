@@ -9,22 +9,27 @@ import Button from '@material-ui/core/Button';
 import { Link, withRouter } from 'react-router-dom'
 import { List, ListItemIcon, ListItemText, ListItem } from '@material-ui/core'
 import Drawer from '@material-ui/core/Drawer'
+import Divider from '@material-ui/core/Divider';
 
 
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        flexDirection: 'column',
         width: 320,
         height: 600
-    },
-    appBarGrid: {
-        flexGrow: 1,
     },
     appBar:{
         backgroundColor: "#f2f3f4"
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        flexGrow: 1
+    },
+    menuText: {
+        flexGrow: 4
+    },
+    menuIcon: {
+        flexGrow: 1
     },
     title: {
         flexGrow: 1,
@@ -56,16 +61,16 @@ const LayoutWithRouter = withRouter(function Layout(props) {
     }
     return (
         <div className={classes.root}>
-            <div className={classes.appBarGrid}>
+            <div>
                 <AppBar position="absolute" className={classes.appBar}>
                     <Toolbar>
-                        <IconButton className={classes.menuButton} aria-label="menu" onClick={handleDrawerOpen}>
+                        <IconButton className={classes.menuIcon} aria-label="menu" onClick={handleDrawerOpen}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h5">
+                        <Typography className={classes.menuText} variant="h5" color="primary">
                             weCertification
                         </Typography>
-                        <Button>卡包</Button>
+                        <Button className={classes.menuButton}>卡包</Button>
                     </Toolbar>
 
                 </AppBar>
@@ -98,10 +103,10 @@ const LayoutWithRouter = withRouter(function Layout(props) {
             <Button button component={Link} to="/auth"  selected={'/auth' === pathname}> 授权 </Button>
             <Button button component={Link} to="/home"  selected={'/home' === pathname}> 主页 </Button>
             */}
-            <main className={classes.content}>
+            <div className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 {children}
-            </main>
+            </div>
         </div>
     )
 })

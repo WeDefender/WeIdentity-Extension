@@ -11,12 +11,14 @@ export function HomeContent() {
 
     return (
         <div>
+            
             <Button
                 onClick={() => {
                     let value = "12345"
-                    chrome.storage.local.set({key: value}, function() {
+
+                    chrome.storage.local.set({weId: value}, function() {
                         console.log('Value is set to ' + value);
-                      });
+                    });
                     
                       
                 }}>
@@ -24,10 +26,10 @@ export function HomeContent() {
             </Button>
             <Button
                 onClick={() => {
-                    chrome.storage.local.get(['key'], function(result) {
+                    chrome.storage.local.get(['weId'], function(result) {
 
-                        console.log('Value currently is ' + result.key);
-                        setData(result.key)
+                        console.log('Value currently is ' + result.weId);
+                        setData(result.weId)
                     });
                 }}>
                 getData

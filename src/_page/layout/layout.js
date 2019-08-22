@@ -31,9 +31,7 @@ const useStyles = makeStyles(theme => ({
     },
     appBarSpacer: theme.mixins.toolbar,
     content: {
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
+        flexGrow: 1
     }
     
 }))
@@ -64,7 +62,7 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                         <IconButton className={classes.menuButton} aria-label="menu" onClick={handleDrawerOpen}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" className={classes.title} color="black">
+                        <Typography variant="h5">
                             weCertification
                         </Typography>
                         <Button>卡包</Button>

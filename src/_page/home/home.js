@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu'
 import Grid from '@material-ui/core/Grid';
 import { useState, useEffect } from 'react';
+import getStorage from '../../_component/Storage'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -79,15 +80,50 @@ function getShortString(str){
         return str
 }
 
+function getVerifiedStatus(){
+
+}
+
+
+const requestVerified = (weid) => {
+    fetch("http://172.20.10.3:8080/user/getUserStatus", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify({
+            "weid": weid
+        })
+    }).then(function(res) {
+        if (res.status === 200) {
+            return res.json()
+        } else {
+            return Promise.reject(res.json())
+        }
+    }).then(function(data) {
+        console.log(data);
+    }).catch(function(err) {
+        console.log(err);
+        alert("创建失败，请检查网络！");
+    });
+}
+
 export function HomeContent() {
     const [data, setData] = React.useState("null")
     const classes = useStyles()
     
     useEffect(() => {
+        /*
         chrome.storage.local.get(['weId'], function(result) {
             console.log('Value currently is ' + result.weId);
             setData(result.weId)
         });
+        */
+       getStorage("weId",function(result){
+            console.log('Value currently is ' + result.weId);
+            setData(result.weId)
+       })
     }, []);
 
 
@@ -98,14 +134,17 @@ export function HomeContent() {
                     <ListItemIcon className={classes.menuIcon}>
                         <MenuIcon />
                     </ListItemIcon>
-                    <Button>
+                    <ListItem>
                         <Typography variant="h7">
                             Sher
                         </Typography>
                         <Typography component="p">
                             {getShortString(data)}
                         </Typography>
-                    </Button>
+                    </ListItem>
+                    <ListItem button >
+                        待审核
+                    </ListItem>
                     <ListItemIcon className={classes.menuButton}>
                         <MenuIcon />
                     </ListItemIcon>
@@ -134,9 +173,6 @@ export function HomeContent() {
                     <ListContent/>    
                 </ListItem>
             </List>
-                     
-
-
         </div>
     )
 }

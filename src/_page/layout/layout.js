@@ -95,6 +95,9 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                     <ListItem button component={Link} to="/home"  selected={'/home' === pathname}>
                         <ListItemText primary={"主页"} />
                     </ListItem>
+                    <ListItem button component={Link} to="/verify"  selected={'/verify' === pathname}>
+                        <ListItemText primary={"核验"} />
+                    </ListItem>
                 </List>
             </Drawer>
             {/*

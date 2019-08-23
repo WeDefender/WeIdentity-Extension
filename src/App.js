@@ -8,63 +8,8 @@ import {AuthContent} from './_page/auth'
 import {RegisterContent} from './_page/register'
 import {Layout} from './_page/layout'
 
-
-
-
-
-
-/*
-fetch("http://127.0.0.1:7777/postContent", {
-  method: "POST",
-  headers: {
-      "Content-Type": "application/json",
-  },
-  mode: "cors",
-  body: JSON.stringify({
-      content: "留言内容"
-  })
-}).then(function(res) {
-  if (res.status === 200) {
-      return res.json()
-  } else {
-      return Promise.reject(res.json())
-  }
-}).then(function(data) {
-  console.log(data);
-}).catch(function(err) {
-  console.log(err);
-});
-*/
-
-function App() {
-  /*
-  useEffect(() => {
-    fetch("http://192.168.1.180:8080/user/createWeId", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify({
-        "name":"Sher123",
-        "type": 0
-      })
-    }).then(function(res) {
-      if (res.status === 200) {
-          return res.json()
-      } else {
-          return Promise.reject(res.json())
-      }
-    }).then(function(data) {
-      console.log(data);
-    }).catch(function(err) {
-      console.log(err);
-    });
-  });
-  */
-  
+function App() {  
   return (
-
     <BrowserRouter>
       <Layout>
           <Switch>

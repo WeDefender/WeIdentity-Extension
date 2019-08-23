@@ -54,7 +54,8 @@ const RegisterWithRouter = withRouter(function RegisterContent(props) {
     }
 
     const register = () => {
-        fetch("http://defi.sher.vip/user/createWeId", {
+        console.log("in register")
+        fetch("http://192.168.43.244/user/createWeId", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

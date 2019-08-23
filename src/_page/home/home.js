@@ -2,12 +2,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
-import { CssBaseline,Button } from '@material-ui/core';
+import { CssBaseline,Button, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu'
 import Grid from '@material-ui/core/Grid';
@@ -70,6 +71,14 @@ function ListContent(){
     )
 }
 
+function getShortString(str){
+    if (str.length>10){
+        return str.substring(0,5)+"..."+str.substring(str.length-5,str.length-1)
+    }
+    else
+        return str
+}
+
 export function HomeContent() {
     const [data, setData] = React.useState("null")
     const classes = useStyles()
@@ -81,6 +90,7 @@ export function HomeContent() {
         });
     }, []);
 
+
     return (
         <div>
             <div>
@@ -88,14 +98,20 @@ export function HomeContent() {
                     <ListItemIcon className={classes.menuIcon}>
                         <MenuIcon />
                     </ListItemIcon>
-                    <ListItemText primary="weID" className={classes.menuText}/>
+                    <Button>
+                        <Typography variant="h7">
+                            Sher
+                        </Typography>
+                        <Typography component="p">
+                            {getShortString(data)}
+                        </Typography>
+                    </Button>
                     <ListItemIcon className={classes.menuButton}>
                         <MenuIcon />
                     </ListItemIcon>
                 </ListItem>  
             </div>
             <Divider />  
-
             <div>
                 <Button
                     onClick={() => {
@@ -109,12 +125,10 @@ export function HomeContent() {
                 </Button>
                 <p> {data} </p>
             </div>
-            
             <Typography variant="subtitle1" gutterBottom>
                     History:
             </Typography>
             <Divider />   
-
             <List component="nav" aria-label="main mailbox folders">
                 <ListItem button>
                     <ListContent/>    

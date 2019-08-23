@@ -56,7 +56,7 @@ const RegisterWithRouter = withRouter(function RegisterContent(props) {
 
     const register = () => {
         console.log("in register")
-        fetch("http://192.168.43.244/user/createWeId", {
+        fetch("http://172.20.10.3:8080/user/createWeId", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

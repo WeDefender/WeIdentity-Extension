@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import { Link, withRouter } from 'react-router-dom'
+import getStorage from '../../_component/Storage'
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -36,6 +37,21 @@ const useStyles = makeStyles(theme => ({
 
 const VerifyWithRouter = withRouter(function VerifyContent(props) {
     const classes = useStyles();
+    const [data, setData] = React.useState("null")
+    
+    useEffect(() => {
+        /*
+        chrome.storage.local.get(['weId'], function(result) {
+            console.log('Value currently is ' + result.weId);
+            setData(result.weId)
+        });
+        */
+       getStorage("weId",function(result){
+            console.log('Value currently is ' + result.weId);
+            setData(result.weId)
+       })
+    }, []);
+
     const [values, setValues] = React.useState({
         name:"Default Name",
         gender:"",
@@ -48,6 +64,40 @@ const VerifyWithRouter = withRouter(function VerifyContent(props) {
     const handleChange = key => event => {
         setValues({ ...values, [key]: event.target.value });
     };
+
+    const requestVerified = () => {
+        console.log("in register")
+        fetch("http://172.20.10.3:8080/user/requestVerifyWeId", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+            body: JSON.stringify({
+                weid:data,
+                name:values.name,
+                gender:values.gender,
+                birthday:values.birthday,
+                address:values.address,
+                identityNumber:values.identityNumber,
+                phoneNumber:values.phoneNumber
+            })
+        }).then(function(res) {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                return Promise.reject(res.json())
+            }
+        }).then(function(data) {
+            console.log(data);
+            alert("审核成功！");//TODO Dialog组件
+            props.history.push({pathname: `/home`})
+        }).catch(function(err) {
+            console.log(err);
+            alert("创建失败，请检查网络！");
+        });
+    }
+    
     return (
         <div>
             <div>
@@ -114,8 +164,8 @@ const VerifyWithRouter = withRouter(function VerifyContent(props) {
                     <Button variant="outlined" className={classes.button}>
                         取消
                     </Button>
-                    <Button variant="outlined" color="primary" className={classes.button}>
-                        创建
+                    <Button variant="outlined" color="primary" className={classes.button} onClick={requestVerified}>
+                        提交审核
                     </Button>
             </div>
         </div>

@@ -14,7 +14,6 @@ import {RootContent} from './_page/root'
 
 function App() {
   
-
   return (
     <BrowserRouter >
       <Layout>

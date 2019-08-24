@@ -96,7 +96,7 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                             </Grid>
                             <Grid item xs={6} className={classes.Center}>
                                 <ListItem className={classes.menuText} button component={Link} to="/home"  selected={'/home' === pathname}>
-                                <h2 align="center">
+                                <h2 align="center" border="5px">
                                     <font color="purple">
                                      FinDefender
                                     </font>

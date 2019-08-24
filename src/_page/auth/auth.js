@@ -92,9 +92,9 @@ const AuthWithRouter = withRouter(function AuthContent(props) {
                 alignItems="center"
             >
             <br />
-                <UserIcon fontSize="large"/>
-                <ArrowIcon />
                 <OrgIcon fontSize="large"/>
+                <ArrowIcon />
+                <UserIcon fontSize="large"/>
                 <br />
             </Grid>
             <Grid

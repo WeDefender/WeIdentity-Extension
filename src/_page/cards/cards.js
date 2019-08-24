@@ -96,15 +96,23 @@ const CardsWithRouter = withRouter(function CardsContent(props) {
             // 又对啦！key应该在数组的上下文中被指定
             <div>
                 <AwesomeCredentialCard userInfo={cert} num={i} />
+                <br />
             </div>
             //<ListContent key={authHistory.toString()} num={i} org={authHistory} status={true} index = {1}/>
         );
     }
 
     return (
-        <div>
+        <div align="center">
+            <br />
             {ACC}
-            <Button onClick={() => {props.history.push({pathname: `/subcard`})}}> 添加新凭证 </Button>
+            <br />
+            <br />
+            <br />
+            <Button color="primary" variant="contained" onClick={() => {props.history.push({pathname: `/subcard`})}}> 添加新凭证 </Button>
+            <br />
+            <br />
+            <br />
         </div>
     )
 })

@@ -28,10 +28,11 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     },
     menuText: {
-        flexGrow: 4
+        flexGrow: 4,
+        textAlign: "center"
     },
     menuIcon: {
-        flexGrow: 1
+        textAlign: "center"
     },
     title: {
         flexGrow: 1,
@@ -72,8 +73,8 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                         <IconButton className={classes.menuIcon} aria-label="menu" onClick={handleDrawerOpen}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography className={classes.menuText} variant="h5" color="primary">
-                            weCertification
+                        <Typography className={classes.menuText} variant="h5" component={Link} to="/home"  selected={'/home' === pathname}>
+                            Apollo
                         </Typography>
                         <Button className={classes.menuButton} component={Link} to="/cards"  selected={'/cards' === pathname}>卡包</Button>
                     </Toolbar>

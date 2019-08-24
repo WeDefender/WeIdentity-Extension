@@ -42,6 +42,10 @@ const useStyles = makeStyles(theme => ({
     menuIcon: {
         flexGrow: 1
     },
+    logoDiv:{
+        height:300,
+        textAlign: "center"
+    },
     logo:{
         width:320
     }
@@ -174,7 +178,7 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                 </ListItem>  
             </div>
             <Divider />  
-            <div>
+            <div className={classes.logoDiv}>
                 <img src="/WeIdentity.png" alt="" className={classes.logo}/>
             </div>
             <Typography variant="subtitle1" gutterBottom>

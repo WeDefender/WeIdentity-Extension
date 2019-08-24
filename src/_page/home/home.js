@@ -82,13 +82,7 @@ function ListContent(){
 
 
 
-function getShortString(str){
-    if (str.length>10){
-        return str.substring(0,5)+"..."+str.substring(str.length-5,str.length)
-    }
-    else
-        return str
-}
+
 
 function getVerifiedStatus(){
 
@@ -106,36 +100,49 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
     const [verifyStatus, setVerifyStatus] = React.useState(0)
     const [nickName, setNickName] = React.useState("Default")
     const classes = useStyles()
-    
+    const getShortString = (str) => {
+        if (str==undefined)
+            return ""
+        else if (str.length>10){
+            return str.substring(0,5)+"..."+str.substring(str.length-5,str.length)
+        }
+        else
+            return str
+    }
     useEffect(() => {
         
         chrome.storage.local.get(['weId'], function(result) {
             console.log('Value currently is ' + result.weId);
             setData(result.weId);
-            fetch("http://192.168.1.111:8080/user/getUserStatus", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                mode: "cors",
-                body: JSON.stringify({
-                    "weid":result.weId
-                })
-            }).then(function(res) {
-                if (res.status === 200) {
-                    return res.json()
-                } else {
-                    return Promise.reject(res.json())
-                }
-            }).then(function(data) {
-                console.log(data);
-                if (data.data.status == '1'){
-                    setVerifyStatus(1)
-                } 
-            }).catch(function(err) {
-                console.log(err);
-                alert("rpc失败，请检查网络！");//TODO 
-            });
+            if (result.weId == undefined){
+                props.history.push({pathname: `/register`})
+            }
+            else{
+                fetch("http://192.168.1.111:8080/user/getUserStatus", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    mode: "cors",
+                    body: JSON.stringify({
+                        "weid":result.weId
+                    })
+                }).then(function(res) {
+                    if (res.status === 200) {
+                        return res.json()
+                    } else {
+                        return Promise.reject(res.json())
+                    }
+                }).then(function(data) {
+                    console.log(data);
+                    if (data.data.status == '1'){
+                        setVerifyStatus(1)
+                    } 
+                }).catch(function(err) {
+                    console.log(err);
+                    alert("rpc失败，请检查网络！");//TODO 
+                });
+            }
         });
     }, []);
 

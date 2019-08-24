@@ -47,18 +47,6 @@ const useStyles = makeStyles(theme => ({
 	//Shared code. When the argument length is two, it is coming from the context
 // menu, while a single argument is coming from the browser action.
 
-function fctContext() {
-    var tab = arguments.length == 2 ? arguments[1] : arguments[0];
-    console.log("in fctContext")
-    // Do whatever you want with the tab.
- }
- 
-// Browser Action
-chrome.browserAction.onClicked.addListener(fctContext);
-// Context Menu
-
-
-
 
 const LayoutWithRouter = withRouter(function Layout(props) {
     const classes = useStyles()
@@ -68,12 +56,8 @@ const LayoutWithRouter = withRouter(function Layout(props) {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return
         }
-
         setOpen(open)
     }
-
-    
-
     const handleDrawerOpen = () => {
         setOpen(true)
     }
@@ -91,9 +75,8 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                         <Typography className={classes.menuText} variant="h5" color="primary">
                             weCertification
                         </Typography>
-                        <Button className={classes.menuButton}>卡包</Button>
+                        <Button className={classes.menuButton} component={Link} to="/cards"  selected={'/cards' === pathname}>卡包</Button>
                     </Toolbar>
-
                 </AppBar>
                 
             </div>
@@ -118,6 +101,9 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                     </ListItem>
                     <ListItem button component={Link} to="/verify"  selected={'/verify' === pathname}>
                         <ListItemText primary={"核验"} />
+                    </ListItem>
+                    <ListItem button component={Link} to="/cards"  selected={'/cards' === pathname}>
+                        <ListItemText primary={"卡包"} />
                     </ListItem>
                 </List>
             </Drawer>

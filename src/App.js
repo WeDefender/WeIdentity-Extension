@@ -8,6 +8,7 @@ import {AuthContent} from './_page/auth'
 import {RegisterContent} from './_page/register'
 import {Layout} from './_page/layout'
 import {VerifyContent} from './_page/verify'
+import {CardsContent} from './_page/cards'
 
 function App() {  
   return (
@@ -22,7 +23,8 @@ function App() {
             <Route path="/verify" component={VerifyContent}></Route>
             {/* 授权 */}
             <Route path="/auth" component={AuthContent}></Route>
-            
+            {/* 卡包 */}
+            <Route path="/cards" component={CardsContent}></Route>
           </Switch >
       </Layout>
     </BrowserRouter >

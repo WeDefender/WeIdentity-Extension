@@ -10,6 +10,16 @@ function setStatus(bool,cb){
 		cb()
 	});
 }
+function setRequestOrg(org,cb){
+	chrome.storage.local.set({requestOrg: org}, function() {
+		cb()
+	});
+}
+function setRequestIndex(index,cb){
+	chrome.storage.local.set({requestIndex: index}, function() {
+		cb()
+	});
+}
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
@@ -26,7 +36,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 	else if (request.greeting.type == "getCredential"){
 		chrome.browserAction.setBadgeText({text: 'new'});
 		setStatus(true,function(){
-			sendResponse("1");
+			setRequestOrg(request.greeting.params.name,function()
+			{
+				setRequestIndex(request.greeting.params.index,function(){
+					sendResponse("1");
+				})	
+			})
 			
 		})
 	}

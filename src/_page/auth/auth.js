@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import { Link, withRouter } from 'react-router-dom'
+import getStorage from '../../_component/Storage'
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -23,7 +24,26 @@ const useStyles = makeStyles(theme => ({
 
 const AuthWithRouter = withRouter(function AuthContent(props) {
     const classes = useStyles();
+    const [org, setOrg] = React.useState("组织1");
+    const [index, setIndex] = React.useState(1);
 
+    useEffect(() => {
+        /*
+        chrome.storage.local.get(['weId'], function(result) {
+            console.log('Value currently is ' + result.weId);
+            setData(result.weId)
+        });
+        */
+       getStorage("requestOrg",function(result){
+            console.log('requestOrg currently is ' + result.requestOrg);
+            setOrg(result.requestOrg);
+            
+            getStorage("requestIndex",function(result){
+                console.log('requestIndex currently is ' + result.requestIndex);
+                setIndex(result.requestIndex);
+           })
+       })
+    }, []);
 
     return (
         <Grid container>
@@ -43,7 +63,7 @@ const AuthWithRouter = withRouter(function AuthContent(props) {
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="h7" gutterBottom>
-                        是否授权给 organization?
+                        是否授权给 {org}?
                 </Typography>
             </Grid>
             <Grid item xs={12}>

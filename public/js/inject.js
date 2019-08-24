@@ -141,7 +141,7 @@ Pra.prototype.getWeID = function () {
 ***授权凭证
 ***@return 返回weID
 */
-Pra.prototype.getCredential = function (organization) {
+Pra.prototype.getCredential = function (org,idIndex) {
     return new Promise(function (resolve, reject) {
         var praCallbackFun = getCallbackName();
         window[praCallbackFun] = function (res) {
@@ -159,7 +159,7 @@ Pra.prototype.getCredential = function (organization) {
                 reject(e);
             }
         }
-        sendPraRequest('getCredential', '', '', {name: organization}, praCallbackFun);
+        sendPraRequest('getCredential', '', '', {name: org,index:idIndex}, praCallbackFun);
     });
 }
 if (typeof window !== 'undefined') {

@@ -1,0 +1,9 @@
+.react-health-card--ahm .react-health-card__front,
+.react-health-card--ahm .react-health-card__back {
+  background: linear-gradient(to right, #353535, #000000); }
+
+.react-health-card__logo.react-health-card--ahm {
+  width: 70px; }
+
+.react-health-card__logo.react-health-card--default {
+  width: 70px; }

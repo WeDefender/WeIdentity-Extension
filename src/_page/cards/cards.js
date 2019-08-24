@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
-import { CssBaseline,Button, Container } from '@material-ui/core';
+import { CssBaseline, Button, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,6 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import { useState, useEffect } from 'react';
 import getStorage from '../../_component/Storage'
 import { Link, withRouter } from 'react-router-dom'
+import { AwesomeCredentialCard } from './awesomeCredentialCard'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,12 +29,32 @@ const CardsWithRouter = withRouter(function CardsContent(props) {
     const [data, setData] = React.useState("null")
     const classes = useStyles()
 
+    const userInfo = {
+        "weid": "did:weid:1:0xac82c2c1f986f2da31d8475d48a595b6533e3ef6",
+        "name": "林泽培",
+        "gender": "男",
+        "birthday": "1995-05-09",
+        "address": "浙江省",
+        "identityNumber": "330xxxxxxxxxxxxxxx",
+        "phoneNumber": "18862173084"
+    }
+
     return (
         <div>
-            123
+            <AwesomeCredentialCard userInfo={userInfo} />
+            <br></br>
+            <AwesomeCredentialCard userInfo={userInfo} />
+            <br></br>
+            <AwesomeCredentialCard userInfo={userInfo} />
+            <br></br>
+            <AwesomeCredentialCard userInfo={userInfo} />
+            <br></br>
+            <AwesomeCredentialCard userInfo={userInfo} />
+            <br></br>
+            <AwesomeCredentialCard userInfo={userInfo} />
         </div>
     )
 })
 
-export {CardsWithRouter as CardsContent}
+export { CardsWithRouter as CardsContent }
 

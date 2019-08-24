@@ -1,3 +1,4 @@
+/*global chrome*/
 import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
@@ -22,10 +23,35 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+
+
 const AuthWithRouter = withRouter(function AuthContent(props) {
     const classes = useStyles();
     const [org, setOrg] = React.useState("组织1");
     const [index, setIndex] = React.useState(1);
+    
+    const [authHistory,setAuthHistory] = React.useState([])
+
+    const addAuthHistory = () => {
+        chrome.storage.local.get()
+    }
+
+    const auth = async () => {
+        let authHistoryNew = authHistory.push(org);
+        await setAuthHistory(authHistoryNew)
+        await chrome.storage.local.set({"authHistory":authHistory},function(){
+        })
+        await props.history.push({pathname: `/home`})
+    }
+
+    useEffect(() => {
+        chrome.storage.local.get(["authHistory"],function(result){
+            console.log('authHistory currently is ' + result.authHistory);
+            if (result.authHistory != undefined){
+                setAuthHistory(result.authHistory)
+            }
+        })
+    }, []);
 
     useEffect(() => {
         /*
@@ -70,7 +96,7 @@ const AuthWithRouter = withRouter(function AuthContent(props) {
                 <Button variant="outlined" className={classes.button} onClick={()=>{props.history.push({pathname: `/home`})}}>
                     取消
                 </Button>
-                <Button variant="outlined" color="primary" className={classes.button} onClick={()=>{props.history.push({pathname: `/home`})}}>
+                <Button variant="outlined" color="primary" className={classes.button} onClick={auth}>
                     授权
                 </Button>
             </Grid>

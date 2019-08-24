@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu'
+import VoiceIcon from '@material-ui/icons/RecordVoiceOver'
 import Grid from '@material-ui/core/Grid';
 import { useState, useEffect } from 'react';
 import getStorage from '../../_component/Storage'
@@ -56,49 +57,35 @@ const useStyles = makeStyles(theme => ({
     
 }))
 
-function ListContent(){
+function ListContent(props){
+    console.log(props)
     return(
         <Grid container>
             <Grid item xs={12}>
                 <Typography variant="subtitle2" gutterBottom>
-                        #99 - 7/19/2019 at 21:23
+                        #{props.num}
                 </Typography>
             </Grid>
             <Grid item xs={2}>
-                <MenuIcon />
+                <VoiceIcon />
             </Grid>
             <Grid item xs={8}>
                 <Typography variant="h6" gutterBottom>
-                        授权确认
+                        {props.org}请求授权{props.index}号凭证
                 </Typography>
                 <Typography variant="h7" gutterBottom>
-                        确认
+                        授权确认
                 </Typography>
             </Grid>
             <Grid item xs={2}>
                 <Typography variant="h7" gutterBottom>
-                        -0 eth
+                        {props.status?"通过":"拒绝"}
                 </Typography>
             </Grid>
         </Grid>     
     )
 }
-
-
-
-
-
-function getVerifiedStatus(){
-
-}
-
-
-
 //props.history.push({pathname: `/home`})
-
-
-
-
 const HomeWithRouter = withRouter(function HomeContent(props) {
     const [data, setData] = React.useState("null")
     const [verifyStatus, setVerifyStatus] = React.useState(0)
@@ -156,6 +143,27 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
         })
     }, []);
 
+    const [authHistory,setAuthHistory] = React.useState([])
+    useEffect(() => {
+        chrome.storage.local.get(["authHistory"],function(result){
+            console.log('authHistory currently is ' + result.authHistory);
+            
+            if (result.authHistory != undefined){
+                setAuthHistory(result.authHistory)
+            }
+        })
+
+    }, []);
+
+    const listItems = authHistory.map((authHistory,i) =>
+        // 又对啦！key应该在数组的上下文中被指定
+        <ListItem button>
+            <ListContent key={authHistory.toString()} num={i}
+                    org={authHistory} status={true} index = {1}/>
+        </ListItem>
+ 
+    );
+
     const requestVerified = () => {
         props.history.push({pathname: `/verify`})
     }
@@ -196,10 +204,8 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                     History:
             </Typography>
             <Divider />   
-            <List component="nav" aria-label="main mailbox folders">
-                <ListItem button>
-                    <ListContent/>    
-                </ListItem>
+            <List component="nav" aria-label="main mailbox folders">         
+                    {listItems}
             </List>
         </div>
     )

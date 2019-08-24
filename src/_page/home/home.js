@@ -170,8 +170,8 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                                 <MenuIcon />
                             </ListItemIcon>
                         </Grid>
-                        <Grid item xs={6} className={classes.Center}>
-                            <div button>
+                        <Grid item xs={6} className={classes.Center} >
+                            <div >
                                 <div>
                                     {nickName}
                                 </div>
@@ -182,7 +182,7 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                         </Grid>
                         <Grid item xs={3} className={classes.Center}>
                             <ListItem button onClick={verifyStatus==0?requestVerified:()=>{}}>
-                                {verifyStatus==0?"待审核":"已审核"}
+                                {verifyStatus==0?"待审核":verifyStatus==1?"已审核":"未审核"}
                             </ListItem>
                         </Grid>
                     </Grid>   

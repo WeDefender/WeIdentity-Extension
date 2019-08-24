@@ -44,6 +44,9 @@ const useStyles = makeStyles(theme => ({
     },
     Center:{
         textAlign: "center"
+    },
+    logo:{
+        height: 35
     }
     
 }))
@@ -85,7 +88,7 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                         <Grid container>
                             <Grid item xs={3} className={classes.Center}>
                                 <IconButton className={classes.menuIcon} aria-label="menu" onClick={handleDrawerOpen}>
-                                    <MenuIcon />
+                                    <img src="/Logo.png" alt="" className={classes.logo}/>
                                 </IconButton>
                             </Grid>
                             <Grid item xs={6} className={classes.Center}>

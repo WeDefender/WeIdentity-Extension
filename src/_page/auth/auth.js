@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         margin: theme.spacing(1),
+    },
+    title:{
+        paddingTop: theme.spacing(1)
     }
 }));
 
@@ -74,7 +77,7 @@ const AuthWithRouter = withRouter(function AuthContent(props) {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Typography variant="h3" gutterBottom>
+                <Typography className={classes.title} variant="h4" gutterBottom align="center">
                         授权
                 </Typography>
             </Grid>

@@ -92,7 +92,7 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                                 </IconButton>
                             </Grid>
                             <Grid item xs={6} className={classes.Center}>
-                                <ListItem className={classes.menuText} button component={Link} to="/home"  selected={'/home' === pathname}>
+                                <ListItem className={classes.menuText} component={Link} to="/home"  selected={'/home' === pathname}>
                                     Apollo
                                 </ListItem>
                             </Grid>

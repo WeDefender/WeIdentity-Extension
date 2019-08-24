@@ -42,6 +42,9 @@ const useStyles = makeStyles(theme => ({
     menuIcon: {
         flexGrow: 1
     },
+    logo:{
+        width:320
+    }
     
 }))
 
@@ -172,17 +175,7 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
             </div>
             <Divider />  
             <div>
-                <Button
-                    onClick={() => {
-                        chrome.storage.local.get(['weId'], function(result) {
-                            console.log('Value currently is ' + result.weId);
-                            setData(result.weId)
-                        });
-                    }}
-                    variant="outlined">
-                    getData
-                </Button>
-                <p> {data} </p>
+                <img src="/WeIdentity.png" alt="" className={classes.logo}/>
             </div>
             <Typography variant="subtitle1" gutterBottom>
                     History:

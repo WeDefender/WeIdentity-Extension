@@ -95,9 +95,6 @@ const RegisterWithRouter = withRouter(function RegisterContent(props) {
 
     return (
         <div>
-                <Typography component="h3" variant="h6" gutterBottom>
-                    注册新用户
-                </Typography>
                 <Paper square>
                     <Tabs
                         value={value}

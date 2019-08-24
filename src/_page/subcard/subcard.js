@@ -11,6 +11,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link, withRouter } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { CREATE_SELECTIVE_CREDENTIAL } from '../../_constants'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,14 +32,62 @@ const useStyles = makeStyles(theme => ({
 const SubCardWithRouter = withRouter(function SubCardContent(props) {
     const [data, setData] = React.useState("null")
     const classes = useStyles()
+    const [certs, setCerts] = React.useState([])
     const [values, setValues] = React.useState({
-        name:false,
-        gender:false,
-        birthday:false,
-        address:false,
-        identityNumber:false,
-        phoneNumber:false
+        weid:1,
+        name:0,
+        gender:0,
+        birthday:0,
+        address:0,
+        identityNumber:0,
+        phoneNumber:0
     });
+
+    const createSubCard = () =>{
+        chrome.storage.local.get("certs",function(result){
+            console.log('certs currently is ' + JSON.stringify(result.certs));
+            certs.push(...result.certs)
+            
+            fetch(CREATE_SELECTIVE_CREDENTIAL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                mode: "cors",
+                body: JSON.stringify({
+                    "weid":data,
+                    "claimPolicyJson":values
+                })
+            }).then(function(res) {
+                console.log("res:",res)
+                if (res.status === 200) {
+                    return res.json()
+                } else {
+                    return Promise.reject(res.json())
+                }
+            }).then(function(res) {
+                console.log(res);
+                let data = res.data
+                let t = certs
+                t.push(data)
+                setCerts(t)
+                chrome.storage.local.set({"certs":t}, function() {
+                })
+            }).catch(function(err) {
+                console.log(err);
+                alert("rpc失败，请检查网络！");//TODO 
+            });
+            
+        })
+        
+    }
+
+    useEffect(() => {
+            chrome.storage.local.get(['weId'], function(result) {
+                console.log('Value currently is ' + result.weId);
+                setData(result.weId);
+            });
+    }, []);
     /*{
 	"weid":"did:weid:1:0xa1bd5ff47db4afb554004c25d846a9fe14f726cd",
 	"claimPolicyJson":{
@@ -50,7 +100,7 @@ const SubCardWithRouter = withRouter(function SubCardContent(props) {
 	}
 }   */ 
     const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.checked });
+        setValues({ ...values, [name]: event.target.checked?1:0 });
     };
     
     const { name, gender, birthday, address, identityNumber, phoneNumber } = values;
@@ -93,7 +143,7 @@ const SubCardWithRouter = withRouter(function SubCardContent(props) {
                 <Button variant="outlined" className={classes.button} onClick={()=>{props.history.push({pathname: `/home`})}}>
                     取消
                 </Button>
-                <Button variant="outlined" color="primary" className={classes.button}>
+                <Button variant="outlined" color="primary" className={classes.button} onClick={createSubCard}>
                     创建
                 </Button>
             </div>

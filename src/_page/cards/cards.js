@@ -32,56 +32,61 @@ const CardsWithRouter = withRouter(function CardsContent(props) {
 //http://192.168.1.111:8080/common/getCredential
 
     useEffect(() => {
-        if (certs.length == 0) {
-            chrome.storage.local.get(['weId'], function(result) {
-                console.log('Value currently is ' + result.weId);
-                setData(result.weId);
-                if (result.weId == undefined){
-                    props.history.push({pathname: `/register`})
-                }
-                else{
-                    fetch("http://192.168.1.111:8080/common/getCredential", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        mode: "cors",
-                        body: JSON.stringify({
-                            "weid":result.weId,
-                            "type":0
-                        })
-                    }).then(function(res) {
-                        console.log("cards",res)
-                        if (res.status === 200) {
-                            return res.json()
-                        } else {
-                            return Promise.reject(res.json())
-                        }
-                    }).then(function(res) {
-                        console.log(res);
-                        let data = res.data
-                        let t = certs
-                        t.push(data)
-                        setCerts(t)
-                        chrome.storage.local.set({"certs":t}, function() {
-
-                        })
-                    }).catch(function(err) {
-                        console.log(err);
-                        alert("rpc失败，请检查网络！");//TODO 
-                    });
-                }
-            });
-        }         
-    }, []);
-
-    useEffect(() => {
-        chrome.storage.local.get(["certs"],function(result){
-            console.log('certs currently is ' + result.certs);
+        chrome.storage.local.get("certs",function(result){
+            console.log(result)
+            console.log('certs currently is ' + JSON.stringify(result.certs));
+            //console.log(result.certs.length)
             if (result.certs != undefined){
                 setCerts(result.certs)
             }
+            else if (result.certs == undefined || result.certs.length == 0) {
+                console.log("in")
+                chrome.storage.local.get(['weId'], function(result) {
+                    console.log('Value currently is ' + result.weId);
+                    setData(result.weId);
+                    if (result.weId == undefined){
+                        props.history.push({pathname: `/register`})
+                    }
+                    else{
+                        fetch("http://192.168.1.111:8080/common/getCredential", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            mode: "cors",
+                            body: JSON.stringify({
+                                "weid":result.weId,
+                                "type":0
+                            })
+                        }).then(function(res) {
+                            console.log("cards",res)
+                            if (res.status === 200) {
+                                return res.json()
+                            } else {
+                                return Promise.reject(res.json())
+                            }
+                        }).then(function(res) {
+                            console.log(res);
+                            let data = res.data
+                            let t = certs
+                            t.push(data)
+                            setCerts(t)
+                            chrome.storage.local.set({"certs":t}, function() {
+    
+                            })
+                        }).catch(function(err) {
+                            console.log(err);
+                            alert("rpc失败，请检查网络！");//TODO 
+                        });
+                    }
+                });
+            }         
         })
+        
+    }, []);
+
+    useEffect(() => {
+        
     }, []);
 
     let ACC = ""

@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import { Link, withRouter } from 'react-router-dom'
 import getStorage from '../../_component/Storage'
+import { Paper } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -75,27 +76,44 @@ const AuthWithRouter = withRouter(function AuthContent(props) {
     }, []);
 
     return (
-        <Grid container>
-            <Grid item xs={12}>
-                <Typography className={classes.title} variant="h4" gutterBottom align="center">
-                        授权
-                </Typography>
+        <Paper square>
+            <Grid
+                container
+                direction="row-reverse"
+                justify="space-around"
+                alignItems="center"
+            >
+                <h1 align="center">授权</h1>
             </Grid>
-            <Grid item xs={4}>
-                <UserIcon />
-            </Grid>
-            <Grid item xs={4}>
+            <Grid
+                container
+                direction="row-reverse"
+                justify="space-around"
+                alignItems="center"
+            >
+            <br />
+                <UserIcon fontSize="large"/>
                 <ArrowIcon />
+                <OrgIcon fontSize="large"/>
+                <br />
             </Grid>
-            <Grid item xs={4}>
-                <OrgIcon />
-            </Grid>
-            <Grid item xs={12}>
-                <Typography variant="h7" gutterBottom>
-                        是否授权给 {org}?
+            <Grid
+                container
+                direction="row-reverse"
+                justify="space-around"
+                alignItems="center"
+            >
+                <Typography variant="h6" gutterBottom>
+                            是否授权给 {org}?
                 </Typography>
             </Grid>
-            <Grid item xs={12}>
+
+            <Grid
+                container
+                direction="row-reverse"
+                justify="space-around"
+                alignItems="center"
+            >
                 <Button variant="outlined" className={classes.button} onClick={()=>{props.history.push({pathname: `/home`})}}>
                     取消
                 </Button>
@@ -103,7 +121,7 @@ const AuthWithRouter = withRouter(function AuthContent(props) {
                     授权
                 </Button>
             </Grid>
-        </Grid>
+        </Paper>
     )
 })
 

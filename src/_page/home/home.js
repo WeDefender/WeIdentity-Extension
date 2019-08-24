@@ -16,6 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import { useState, useEffect } from 'react';
 import getStorage from '../../_component/Storage'
 import { Link, withRouter } from 'react-router-dom'
+import { GET_USER_STATUS_URL } from '../../_constants'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -95,7 +96,7 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
         if (str==undefined)
             return ""
         else if (str.length>10){
-            return str.substring(0,5)+"..."+str.substring(str.length-5,str.length)
+            return str.substring(0,5)+"..." +str.substring(str.length-5,str.length)
         }
         else
             return str
@@ -109,7 +110,7 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                 props.history.push({pathname: `/register`})
             }
             else{
-                fetch("http://192.168.1.111:8080/user/getUserStatus", {
+                fetch(GET_USER_STATUS_URL, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

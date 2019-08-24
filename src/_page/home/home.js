@@ -146,13 +146,11 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
     const [authHistory,setAuthHistory] = React.useState([])
     useEffect(() => {
         chrome.storage.local.get(["authHistory"],function(result){
-            console.log('authHistory currently is ' + result.authHistory);
-            
+            console.log('authHistory currently is ' + result.authHistory);       
             if (result.authHistory != undefined){
                 setAuthHistory(result.authHistory)
             }
         })
-
     }, []);
 
     const listItems = authHistory.map((authHistory,i) =>

@@ -38,7 +38,17 @@ const SubCardWithRouter = withRouter(function SubCardContent(props) {
         identityNumber:false,
         phoneNumber:false
     });
-    
+    /*{
+	"weid":"did:weid:1:0xa1bd5ff47db4afb554004c25d846a9fe14f726cd",
+	"claimPolicyJson":{
+		"weid": 1,
+		"name": 0,
+		"gender": 1,
+		"birthday": 1,
+		"address": 0,
+		"identityNumber": 0
+	}
+}   */ 
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.checked });
     };

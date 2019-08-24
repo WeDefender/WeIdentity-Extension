@@ -33,8 +33,8 @@ export function AwesomeCredentialCard(props) {
                 cardNumberTitle="数字身份"
                 issueDateTitle="出生日期"
                 memberNumberTitle="手机号码"
-                bgColorFront="#000000"
-                bgColorBack="#000000"
+                bgColorFront={props.num==0?"#000000":"#00ff00"}
+                bgColorBack={props.num==0?"#000000":"#00ff00"}
                 issueDateFormat="YYYY-MM-DD"
                 cardNumber={weid}
                 name={userInfo.gender}

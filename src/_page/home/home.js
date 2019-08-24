@@ -47,7 +47,11 @@ const useStyles = makeStyles(theme => ({
         textAlign: "center"
     },
     logo:{
-        width:320
+        paddingTop:60,
+        width:280
+    },
+    Center:{
+        textAlign: "center"
     }
     
 }))
@@ -161,12 +165,12 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
             <div>
                 <ListItem className={classes.root}>
                     <Grid container>
-                        <Grid item xs={3}>
+                        <Grid item xs={3} className={classes.Center}>
                             <ListItemIcon className={classes.menuIcon}>
                                 <MenuIcon />
                             </ListItemIcon>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} className={classes.Center}>
                             <div button>
                                 <div>
                                     {nickName}
@@ -176,7 +180,7 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                                 </div>
                             </div>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={3} className={classes.Center}>
                             <ListItem button onClick={verifyStatus==0?requestVerified:()=>{}}>
                                 {verifyStatus==0?"待审核":"已审核"}
                             </ListItem>
@@ -185,9 +189,9 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                 </ListItem>  
             </div>
             <Divider />  
-            <Paper className={classes.logoDiv}>
+            <div className={classes.logoDiv}>
                 <img src="/WeIdentity.png" alt="" className={classes.logo}/>
-            </Paper>
+            </div>
             <Typography variant="subtitle1" gutterBottom>
                     History:
             </Typography>

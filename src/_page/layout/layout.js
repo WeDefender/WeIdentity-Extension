@@ -13,6 +13,7 @@ import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider';
 import getStorage from '../../_component/Storage'
 import { useState, useEffect } from 'react';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,6 +41,9 @@ const useStyles = makeStyles(theme => ({
     appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1
+    },
+    Center:{
+        textAlign: "center"
     }
     
 }))
@@ -78,13 +82,24 @@ const LayoutWithRouter = withRouter(function Layout(props) {
             <div>
                 <AppBar position="absolute" className={classes.appBar}>
                     <Toolbar>
-                        <IconButton className={classes.menuIcon} aria-label="menu" onClick={handleDrawerOpen}>
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography className={classes.menuText} variant="h5" component={Link} to="/home"  selected={'/home' === pathname}>
-                            Apollo
-                        </Typography>
-                        <Button className={classes.menuButton} component={Link} to="/cards"  selected={'/cards' === pathname}>卡包</Button>
+                        <Grid container>
+                            <Grid item xs={3} className={classes.Center}>
+                                <IconButton className={classes.menuIcon} aria-label="menu" onClick={handleDrawerOpen}>
+                                    <MenuIcon />
+                                </IconButton>
+                            </Grid>
+                            <Grid item xs={6} className={classes.Center}>
+                                <ListItem className={classes.menuText} button component={Link} to="/home"  selected={'/home' === pathname}>
+                                    Apollo
+                                </ListItem>
+                            </Grid>
+                            <Grid item xs={3} className={classes.Center}>
+                                <Button className={classes.menuButton} component={Link} to="/cards"  selected={'/cards' === pathname}>卡包</Button>
+                            </Grid>
+                        </Grid> 
+                        
+                        
+                        
                     </Toolbar>
                 </AppBar>
                 

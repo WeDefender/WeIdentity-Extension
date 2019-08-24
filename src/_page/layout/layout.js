@@ -46,13 +46,16 @@ const useStyles = makeStyles(theme => ({
         textAlign: "center"
     },
     logo:{
-        height: 35
+        height: 35,
+        paddingTop: 3
+    },
+    card: {
+        paddingTop: 12
     }
     
 }))
 
-
-	//Shared code. When the argument length is two, it is coming from the context
+//Shared code. When the argument length is two, it is coming from the context
 // menu, while a single argument is coming from the browser action.
 
 
@@ -93,16 +96,19 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                             </Grid>
                             <Grid item xs={6} className={classes.Center}>
                                 <ListItem className={classes.menuText} button component={Link} to="/home"  selected={'/home' === pathname}>
-                                    Apollo
+                                <h2 align="center">
+                                    <font color="purple">
+                                     FinDefender
+                                    </font>
+                                </h2>   
                                 </ListItem>
                             </Grid>
                             <Grid item xs={3} className={classes.Center}>
-                                <Button className={classes.menuButton} component={Link} to="/cards"  selected={'/cards' === pathname}>卡包</Button>
+                                <Button className={classes.menuButton} component={Link} to="/cards"  selected={'/cards' === pathname}>
+                                    <img src={require('../../_images/card.png')} width="46" height="32" className={classes.card}/> 
+                                </Button>
                             </Grid>
                         </Grid> 
-                        
-                        
-                        
                     </Toolbar>
                 </AppBar>
                 
@@ -130,7 +136,7 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                         <ListItemText primary={"核验"} />
                     </ListItem>
                     <ListItem button component={Link} to="/cards"  selected={'/cards' === pathname}>
-                        <ListItemText primary={"卡包"} />
+                        <img src={require('../../_images/card.png')}/> 
                     </ListItem>
                     <ListItem button component={Link} to="/subcard"  selected={'/subcard' === pathname}>
                         <ListItemText primary={"子凭证"} />

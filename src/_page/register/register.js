@@ -82,7 +82,7 @@ const RegisterWithRouter = withRouter(function RegisterContent(props) {
                     });
                     chrome.storage.local.set({pubKey: data.data.userWeIdPublicKey.publicKey}, function() {
                         console.log('PubKey is set to ' + data.data.userWeIdPublicKey.publicKey);
-                        alert("创建成功！");//TODO Dialog组件
+                        alert("WeID创建成功！"); //TODO Dialog组件
                         props.history.push({pathname: `/home`})
                     });
                 }); 
@@ -95,7 +95,7 @@ const RegisterWithRouter = withRouter(function RegisterContent(props) {
 
     return (
         <div>
-                <Typography component="h2" variant="h6" gutterBottom>
+                <Typography component="h3" variant="h6" gutterBottom>
                     注册新用户
                 </Typography>
                 <Paper square>

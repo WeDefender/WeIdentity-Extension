@@ -121,7 +121,7 @@ const RegisterWithRouter = withRouter(function RegisterContent(props) {
                     variant="outlined"
                 />
                 <div>
-                    <Button variant="outlined" className={classes.button}>
+                    <Button variant="outlined" className={classes.button} onClick={()=>{props.history.push({pathname: `/home`})}}>
                         取消
                     </Button>
                     <Button variant="outlined" color="primary" className={classes.button} onClick={register}>

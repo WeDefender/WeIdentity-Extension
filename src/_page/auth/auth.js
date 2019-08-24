@@ -9,6 +9,7 @@ import ArrowIcon from '@material-ui/icons/TrendingFlat'
 import Button from '@material-ui/core/Button';
 import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
+import { Link, withRouter } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -20,8 +21,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export function AuthContent() {
+const AuthWithRouter = withRouter(function AuthContent(props) {
     const classes = useStyles();
+
+
     return (
         <Grid container>
             <Grid item xs={12}>
@@ -44,7 +47,7 @@ export function AuthContent() {
                 </Typography>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="outlined" className={classes.button}>
+                <Button variant="outlined" className={classes.button} onClick={()=>{props.history.push({pathname: `/home`})}}>
                     取消
                 </Button>
                 <Button variant="outlined" color="primary" className={classes.button}>
@@ -53,6 +56,8 @@ export function AuthContent() {
             </Grid>
         </Grid>
     )
-}
+})
+
+export {AuthWithRouter as AuthContent}
 
 

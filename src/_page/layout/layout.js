@@ -12,7 +12,7 @@ import { List, ListItemIcon, ListItemText, ListItem } from '@material-ui/core'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider';
 import getStorage from '../../_component/Storage'
-
+import { useState, useEffect } from 'react';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -65,6 +65,14 @@ const LayoutWithRouter = withRouter(function Layout(props) {
     const handleDrawerClose = () => {
         setOpen(false)
     }
+
+    useEffect(() => {
+        chrome.storage.local.get(['isAuth'], function(result) {
+            console.log("isAuth:",result.isAuth)
+            console.log(props)
+        })
+    }, []);
+
     return (
         <div className={classes.root}>
             <div>
@@ -106,8 +114,11 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                     <ListItem button component={Link} to="/cards"  selected={'/cards' === pathname}>
                         <ListItemText primary={"卡包"} />
                     </ListItem>
-                    <ListItem button component={Link} to="/SubCard"  selected={'/subcard' === pathname}>
+                    <ListItem button component={Link} to="/subcard"  selected={'/subcard' === pathname}>
                         <ListItemText primary={"子凭证"} />
+                    </ListItem>
+                    <ListItem button component={Link} to="/"  selected={'/' === pathname}>
+                        <ListItemText primary={"根"} />
                     </ListItem>
                 </List>
             </Drawer>

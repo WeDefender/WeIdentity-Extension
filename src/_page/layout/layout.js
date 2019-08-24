@@ -1,3 +1,4 @@
+/*global chrome*/
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -10,6 +11,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { List, ListItemIcon, ListItemText, ListItem } from '@material-ui/core'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider';
+import getStorage from '../../_component/Storage'
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +43,23 @@ const useStyles = makeStyles(theme => ({
     
 }))
 
+
+	//Shared code. When the argument length is two, it is coming from the context
+// menu, while a single argument is coming from the browser action.
+
+function fctContext() {
+    var tab = arguments.length == 2 ? arguments[1] : arguments[0];
+    console.log("in fctContext")
+    // Do whatever you want with the tab.
+ }
+ 
+// Browser Action
+chrome.browserAction.onClicked.addListener(fctContext);
+// Context Menu
+
+
+
+
 const LayoutWithRouter = withRouter(function Layout(props) {
     const classes = useStyles()
     const { children, location: { pathname } } = props
@@ -52,6 +71,8 @@ const LayoutWithRouter = withRouter(function Layout(props) {
 
         setOpen(open)
     }
+
+    
 
     const handleDrawerOpen = () => {
         setOpen(true)

@@ -97,16 +97,17 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
     const classes = useStyles()
     
     useEffect(() => {
-        /*
+        
         chrome.storage.local.get(['weId'], function(result) {
             console.log('Value currently is ' + result.weId);
             setData(result.weId)
         });
-        */
+        
+       /*
        getStorage("weId",function(result){
             console.log('Value currently is ' + result.weId);
             setData(result.weId)
-       })
+       })*/
     }, []);
 
     const requestVerified = () => {

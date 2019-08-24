@@ -108,7 +108,7 @@ function Pra() {
     this.version = '1.0.0';
   
     window.addEventListener('message', function (event) {
-        this.console.log("我在inject.js，收到content-script的消息");
+        this.console.log("我在inject.js，收到postMessage的消息",event);
     }, false);
   }
 

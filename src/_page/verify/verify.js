@@ -67,7 +67,7 @@ const VerifyWithRouter = withRouter(function VerifyContent(props) {
 
     const requestVerified = () => {
         console.log("in register")
-        fetch("http://172.20.10.3:8080/user/requestVerifyWeId", {
+        fetch("http://192.168.1.111:8080/user/requestVerifyWeId", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

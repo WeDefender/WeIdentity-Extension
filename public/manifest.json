@@ -15,7 +15,8 @@
     "128": "logo192.png"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "notifications"
   ],
   "content_scripts": 
 	[

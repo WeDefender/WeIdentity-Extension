@@ -1,8 +1,27 @@
+function getID(cb){
+	chrome.storage.local.get(['weId'], function(result) {
+		console.log(result.weId)
+		cb(result.weId);
+	})
+}
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
 	console.log('收到来自content-script的消息：');
 	console.log(request, sender, sendResponse);
-	sendResponse('我是后台，我已收到你的消息：' + JSON.stringify(request));
+	//chrome.browserAction.setBadgeText({text: 'new'});
+	//chrome.browserAction.setBadgeText({text: ''});
+	console.log(request.greeting.type)
+	if (request.greeting.type == "getWeID"){
+		getID(function(result){
+			sendResponse(result)
+		})
+		return true;
+	}
+	else if (request.greeting.type == "getCredential"){
+		sendResponse("1");
+	}
+	
 });
 
 chrome.runtime.onConnect.addListener(function(port) {

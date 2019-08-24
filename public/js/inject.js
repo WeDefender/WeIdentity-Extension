@@ -109,6 +109,10 @@ function Pra() {
   
     window.addEventListener('message', function (event) {
         this.console.log("我在inject.js，收到postMessage的消息",event);
+        if (event.data.type == "inject"){
+            console.log(event.data.msg+'('+event.data.params+')')
+            eval(event.data.msg+'('+"'"+event.data.params+"'"+')')
+        }
     }, false);
   }
 

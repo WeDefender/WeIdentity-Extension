@@ -44,6 +44,8 @@ function sendMessageToBackground(message) {
 	//port.postMessage({data: message});
 	chrome.runtime.sendMessage({greeting: message || '你好，我是content-script呀，我主动发消息给后台！'}, function(response) {
 		console.log("我在content-script,主动发消息给background，回复是：",response);
+		window.postMessage({ type: "inject", params: response, msg: message.msg }, '*');
+		//eval(message.msg+'('+'1'+')')
 	});
 
 	
@@ -52,6 +54,15 @@ function sendMessageToBackground(message) {
 // 接收来自inject的消息
 window.addEventListener("message", function(e)
 {
-	console.log("我在content-script,我收到了inject传来的消息：",e);
-	sendMessageToBackground(e.data)
+	
+	if (e.data.type == "getWeID"){
+		console.log("我在content-script,我收到了inject传来的getWeID消息：",e);
+		sendMessageToBackground(e.data)
+		//e.data.msg
+		
+	}
+	else if (e.data.type == "getCredential"){
+		console.log("我在content-script,我收到了inject传来的getCredential消息：",e);
+		sendMessageToBackground(e.data)
+	}
 }, false);

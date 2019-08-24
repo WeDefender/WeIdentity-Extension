@@ -73,9 +73,11 @@ function ListContent(){
     )
 }
 
+
+
 function getShortString(str){
     if (str.length>10){
-        return str.substring(0,5)+"..."+str.substring(str.length-5,str.length-1)
+        return str.substring(0,5)+"..."+str.substring(str.length-5,str.length)
     }
     else
         return str
@@ -94,20 +96,46 @@ function getVerifiedStatus(){
 
 const HomeWithRouter = withRouter(function HomeContent(props) {
     const [data, setData] = React.useState("null")
+    const [verifyStatus, setVerifyStatus] = React.useState(0)
+    const [nickName, setNickName] = React.useState("Default")
     const classes = useStyles()
     
     useEffect(() => {
         
         chrome.storage.local.get(['weId'], function(result) {
             console.log('Value currently is ' + result.weId);
-            setData(result.weId)
+            setData(result.weId);
+            fetch("http://192.168.1.111:8080/user/getUserStatus", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                mode: "cors",
+                body: JSON.stringify({
+                    "weid":result.weId
+                })
+            }).then(function(res) {
+                if (res.status === 200) {
+                    return res.json()
+                } else {
+                    return Promise.reject(res.json())
+                }
+            }).then(function(data) {
+                console.log(data);
+                if (data.data.status == '1'){
+                    setVerifyStatus(1)
+                } 
+            }).catch(function(err) {
+                console.log(err);
+                alert("rpc失败，请检查网络！");//TODO 
+            });
         });
-        
-       /*
-       getStorage("weId",function(result){
-            console.log('Value currently is ' + result.weId);
-            setData(result.weId)
-       })*/
+    }, []);
+
+    useEffect(() => {
+        chrome.storage.local.get(['nickName'], function(result) {
+            setNickName(result.nickName)
+        })
     }, []);
 
     const requestVerified = () => {
@@ -118,23 +146,28 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
         <div>
             <div>
                 <ListItem className={classes.root}>
-                    <ListItemIcon className={classes.menuIcon}>
-                        <MenuIcon />
-                    </ListItemIcon>
-                    <ListItem>
-                        <Typography variant="h7">
-                            Sher
-                        </Typography>
-                        <Typography component="p">
-                            {getShortString(data)}
-                        </Typography>
-                    </ListItem>
-                    <ListItem button onClick={requestVerified}>
-                        待审核
-                    </ListItem>
-                    <ListItemIcon className={classes.menuButton}>
-                        <MenuIcon />
-                    </ListItemIcon>
+                    <Grid container>
+                        <Grid item xs={3}>
+                            <ListItemIcon className={classes.menuIcon}>
+                                <MenuIcon />
+                            </ListItemIcon>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <div button>
+                                <div>
+                                    {nickName}
+                                </div>
+                                <div>
+                                    {getShortString(data)}
+                                </div>
+                            </div>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <ListItem button onClick={verifyStatus==0?requestVerified:()=>{}}>
+                                {verifyStatus==0?"待审核":"已审核"}
+                            </ListItem>
+                        </Grid>
+                    </Grid>   
                 </ListItem>  
             </div>
             <Divider />  

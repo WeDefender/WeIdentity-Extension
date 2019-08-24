@@ -74,17 +74,19 @@ const RegisterWithRouter = withRouter(function RegisterContent(props) {
             }
         }).then(function(data) {
             console.log(data);
-            chrome.storage.local.set({weId: data.data.weId}, function() {
-                console.log('Weid is set to ' + data.data.weId);
-                chrome.storage.local.set({prvKey: data.data.userWeIdPrivateKey.privateKey}, function() {
-                    console.log('prvKey is set to ' + data.data.userWeIdPrivateKey.privateKey);
-                });
-                chrome.storage.local.set({pubKey: data.data.userWeIdPublicKey.publicKey}, function() {
-                    console.log('PubKey is set to ' + data.data.userWeIdPublicKey.publicKey);
-                    alert("创建成功！");//TODO Dialog组件
-                    props.history.push({pathname: `/home`})
-                });
-            }); 
+            chrome.storage.local.set({nickName: values.name}, function() {
+                chrome.storage.local.set({weId: data.data.weId}, function() {
+                    console.log('Weid is set to ' + data.data.weId);
+                    chrome.storage.local.set({prvKey: data.data.userWeIdPrivateKey.privateKey}, function() {
+                        console.log('prvKey is set to ' + data.data.userWeIdPrivateKey.privateKey);
+                    });
+                    chrome.storage.local.set({pubKey: data.data.userWeIdPublicKey.publicKey}, function() {
+                        console.log('PubKey is set to ' + data.data.userWeIdPublicKey.publicKey);
+                        alert("创建成功！");//TODO Dialog组件
+                        props.history.push({pathname: `/home`})
+                    });
+                }); 
+            });
         }).catch(function(err) {
             console.log(err);
             alert("创建失败，请检查网络！");

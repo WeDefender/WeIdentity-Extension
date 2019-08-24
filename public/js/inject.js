@@ -147,7 +147,6 @@ Pra.prototype.getCredential = function (organization) {
                     {
                         status:"",   0/1
                         data:{
-
                         }     
                     }
                 */ 
@@ -159,7 +158,6 @@ Pra.prototype.getCredential = function (organization) {
         sendPraRequest('getCredential', '', '', {name: organization}, praCallbackFun);
     });
 }
-
 if (typeof window !== 'undefined') {
     window.weID = new Pra();
-  }
+}

@@ -90,8 +90,11 @@ const VerifyWithRouter = withRouter(function VerifyContent(props) {
             }
         }).then(function(data) {
             console.log(data);
-            alert("审核成功！");//TODO Dialog组件
-            props.history.push({pathname: `/home`})
+            chrome.storage.local.set({identityData: values}, function() {
+                alert("审核成功！");//TODO Dialog组件
+                props.history.push({pathname: `/home`})
+            }); 
+            
         }).catch(function(err) {
             console.log(err);
             alert("创建失败，请检查网络！");

@@ -105,6 +105,9 @@ const LayoutWithRouter = withRouter(function Layout(props) {
                     <ListItem button component={Link} to="/cards"  selected={'/cards' === pathname}>
                         <ListItemText primary={"卡包"} />
                     </ListItem>
+                    <ListItem button component={Link} to="/SubCard"  selected={'/subcard' === pathname}>
+                        <ListItemText primary={"子凭证"} />
+                    </ListItem>
                 </List>
             </Drawer>
             {/*

@@ -54,15 +54,16 @@ function sendMessageToBackground(message) {
 // 接收来自inject的消息
 window.addEventListener("message", function(e)
 {
-	
-	if (e.data.type == "getWeID"){
-		console.log("我在content-script,我收到了inject传来的getWeID消息：",e);
-		sendMessageToBackground(e.data)
-		//e.data.msg
-		
-	}
-	else if (e.data.type == "getCredential"){
-		console.log("我在content-script,我收到了inject传来的getCredential消息：",e);
-		sendMessageToBackground(e.data)
+	if (e.data.type != undefined){
+		if (e.data.type == "getWeID"){
+			console.log("我在content-script,我收到了inject传来的getWeID消息：",e);
+			sendMessageToBackground(e.data)
+			//e.data.msg
+			
+		}
+		else if (e.data.type == "getCredential"){
+			console.log("我在content-script,我收到了inject传来的getCredential消息：",e);
+			sendMessageToBackground(e.data)
+		}
 	}
 }, false);

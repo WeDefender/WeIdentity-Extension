@@ -1,13 +1,11 @@
-# weIdentity Browser Extension
+# WeIdentity Browser Extension
 
-WeIdentity Chrome Browser Extension
+WeIdentity Chrome Extension
 
 ## Building locally
 
-
-
-- git clone https://github.com/DeFiDefender/weid-extension.git
-- cd weid-extension
+- git clone https://github.com/DeFiDefender/WeIdentity-Extension.git
+- cd WeIdentity-Extension
 - npm run build
 - Open Chrome & Input "chrome://extension" in url blank
 - Load folder & Select 'build' folder 
@@ -15,7 +13,6 @@ WeIdentity Chrome Browser Extension
 
 # Architecture
 
-![](nomnoml.svig)
+![](nomnoml.svg)
 
 
-### I am coming.

@@ -180,10 +180,10 @@ const HomeWithRouter = withRouter(function HomeContent(props) {
                         <Grid item xs={6} className={classes.Center} >
                             <ListItem button>
                                 <div >
-                                    <div>
+                                    <div className={classes.Center}>
                                         {nickName}
                                     </div>
-                                    <div>
+                                    <div className={classes.Center}>
                                         {getShortString(data)}
                                     </div>
                                 </div>
